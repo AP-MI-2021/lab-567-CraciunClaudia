@@ -12,7 +12,7 @@ def test_create():
     cheltuieli= get_data()
     params = (100,2050,'10.11.2021','alte cheltuieli')
     c_new = creeaza_cheltuiala(*params)
-    new_cheltuieli = create(cheltuieli , *params)
+    new_cheltuieli = create(*params ,cheltuieli)
     assert len(new_cheltuieli) == len(cheltuieli) +1
 
 
