@@ -1,5 +1,5 @@
 from Domain.Cheltuiala import get_str, get_numar, get_suma, get_data, get_tip, creeaza_cheltuiala
-from Logic.crud import create, read, update
+from Logic.crud import create, read, update, delete
 
 
 def show_menu():
@@ -35,10 +35,17 @@ def handle_show_details(cheltuieli):
 
 def handle_update(cheltuieli):
     numar_apartament = int(input('Dati noul numar al apartamentului: '))
-    suma = float(input('Dati noua suma a cheltuielii'))
-    data = (input('Dati noua data a cheltuielii'))
-    tip = (input('Dati noul tip al cheltuielii'))
+    suma = float(input('Dati noua suma a cheltuielii: '))
+    data = (input('Dati noua data a cheltuielii: '))
+    tip = (input('Dati noul tip al cheltuielii: '))
     return update(cheltuieli,creeaza_cheltuiala(numar_apartament,suma,data,tip))
+
+
+def handle_delete(cheltuieli):
+    numar_apartament = int(input('Dati numarul apartamentului care se va sterge: '))
+    cheltuieli = delete(cheltuieli,numar_apartament)
+    print ('Stergerea a fost efectuata cu succes!')
+    return cheltuieli
 
 
 def handle_crud(cheltuieli):
@@ -55,6 +62,8 @@ def handle_crud(cheltuieli):
             cheltuieli = handle_add(cheltuieli)
         elif optiune == '2':
             cheltuieli = handle_update(cheltuieli)
+        elif optiune == '3':
+            cheltuieli = handle_delete(cheltuieli)
         elif optiune == 'a':
             handle_show_all(cheltuieli)
         elif optiune == 'd':
