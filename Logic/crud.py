@@ -1,7 +1,8 @@
 from Domain.Cheltuiala import creeaza_cheltuiala, get_numar
 
 
-def create(lst_cheltuieli, numar_apartament:int , suma, data, tip, creeaza_cheltuieli):
+def create(lst_cheltuieli,
+           numar_apartament:int , suma, data, tip, creeaza_cheltuieli):
     '''
 
     :param lst_cheltuieli: Lista de cheltuieli
