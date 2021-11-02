@@ -2,7 +2,7 @@ from Domain.Cheltuiala import creeaza_cheltuiala, get_numar
 
 
 def create(lst_cheltuieli,
-           numar_apartament:int , suma, data, tip, creeaza_cheltuieli):
+           numar_apartament:int , suma, data, tip , creeaza_cheltuieli):
     '''
 
     :param lst_cheltuieli: Lista de cheltuieli
@@ -12,6 +12,8 @@ def create(lst_cheltuieli,
     :param tip:tipul cheltuielii: intretinere,canal,altele
     :return:O noua lista formata din lst_cheltuieli si noua cheltuiala
     '''
+    if read(lst_cheltuieli,numar_apartament) is not None:
+        raise ValueError(f'Exista deja un apartament cu numarul {numar_apartament}')
     cheltuiala = creeaza_cheltuiala(numar_apartament,suma,data,tip)
     #lst_cheltuieli.append(cheltuiala)
     return lst_cheltuieli + [cheltuiala]
@@ -23,6 +25,10 @@ def read(lst_cheltuieli,numar_apartament:int =None):
     :param numar_apartament: Numarul apartamentului
     :return:Apartamentul cu numarul numar_apartament sau lista cu toate cheltuielile daca numar_apartament=None
     '''
+    if not numar_apartament :
+            return lst_cheltuieli
+
+
     apartament_cu_numar=None
 
     for cheltuiala in lst_cheltuieli:
@@ -31,7 +37,9 @@ def read(lst_cheltuieli,numar_apartament:int =None):
 
     if apartament_cu_numar:
         return apartament_cu_numar
-    return lst_cheltuieli
+
+    return None
+
 
 def update(lst_cheltuieli,new_cheltuiala):
     '''

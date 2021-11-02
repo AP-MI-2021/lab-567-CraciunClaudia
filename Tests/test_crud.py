@@ -13,7 +13,15 @@ def test_create():
     params = (100,2050,'10.11.2021','alte cheltuieli')
     c_new = creeaza_cheltuiala(*params)
     new_cheltuieli = create(cheltuieli , *params)
-    assert len(new_cheltuieli) == len(cheltuieli) +1
+    assert len(new_cheltuieli) == len(cheltuieli) + 1
+
+    params2 = (50,20,'1.1.1','hgfd')
+    try:
+        _ = create(new_cheltuieli,*params2)
+        assert False
+    except ValueError:
+        assert True # sau pass
+
 
 
     #found = False

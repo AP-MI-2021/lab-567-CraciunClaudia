@@ -1,5 +1,6 @@
 from Domain.Cheltuiala import get_str, get_numar, get_suma, get_data, get_tip, creeaza_cheltuiala
 from Logic.crud import create, read, update, delete
+from Logic.functionalitati import stergere_cheltuieli_pentru_numar
 
 
 def show_menu():
@@ -9,12 +10,16 @@ def show_menu():
 
 
 def handle_add(cheltuieli):
-    numar_apartament = int(input('Dati numarul apartamentului: '))
-    suma = float(input('Dati suma cheltuielii'))
-    data = (input('Dati data cheltuielii'))
-    tip = (input('Dati tipul cheltuielii'))
-    return create(cheltuieli,numar_apartament,suma,data,tip)
+    try:
+        numar_apartament = int(input('Dati numarul apartamentului: '))
+        suma = float(input('Dati suma cheltuielii'))
+        data = (input('Dati data cheltuielii'))
+        tip = (input('Dati tipul cheltuielii'))
 
+        return create(cheltuieli,numar_apartament,suma,data,tip)
+    except ValueError as ve:
+        print('Eroare: ',ve)
+    return cheltuieli
 
 def handle_show_all(cheltuieli):
     for cheltuiala in cheltuieli :
@@ -48,6 +53,13 @@ def handle_delete(cheltuieli):
     return cheltuieli
 
 
+def handle_stergere_cheltuieli(cheltuieli):
+    numar = input('Dati numarul cautat pentru stergerea cheltuielilor: ')
+    cheltuieli = stergere_cheltuieli_pentru_numar(cheltuieli,numar)
+    print('Toate cheltuielile au fost sterse.')
+    return cheltuieli
+
+
 def handle_crud(cheltuieli):
     while True:
         print('1.Adaugare')
@@ -61,7 +73,7 @@ def handle_crud(cheltuieli):
         if optiune == '1':
             cheltuieli = handle_add(cheltuieli)
         elif optiune == '2':
-            cheltuieli = handle_update(cheltuieli)
+            cheltuieli = handle_stergere_cheltuieli(cheltuieli)
         elif optiune == '3':
             cheltuieli = handle_delete(cheltuieli)
         elif optiune == 'a':
