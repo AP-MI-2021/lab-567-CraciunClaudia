@@ -15,9 +15,9 @@ def create(lst_cheltuieli, numar_apartament:int , suma, data, tip, creeaza_chelt
     #lst_cheltuieli.append(cheltuiala)
     return lst_cheltuieli + [cheltuiala]
 
-def read(lst_cheltuieli,numar_apartament=None):
+def read(lst_cheltuieli,numar_apartament:int =None):
     '''
-    Citeste o prajitura din baza de date
+    Citeste o cheltuiala din baza de date
     :param lst_cheltuieli:lista de cheltuieli
     :param numar_apartament: Numarul apartamentului
     :return:Apartamentul cu numarul numar_apartament sau lista cu toate cheltuielile daca numar_apartament=None
@@ -48,7 +48,7 @@ def update(lst_cheltuieli,new_cheltuiala):
             new_cheltuieli.append(new_cheltuiala)
     return new_cheltuieli
 
-def delete(lst_cheltuieli,numar_apartament):
+def delete(lst_cheltuieli,numar_apartament:int):
     '''
 
     :param lst_cheltuieli:
