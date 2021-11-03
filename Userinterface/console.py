@@ -1,6 +1,7 @@
 from Domain.Cheltuiala import get_str, get_numar, get_suma, get_data, get_tip, creeaza_cheltuiala
 from Logic.crud import create, read, update, delete
-from Logic.functionalitati import stergere_cheltuieli_pentru_numar, adaugare_valori_la_cheltuieli
+from Logic.functionalitati import stergere_cheltuieli_pentru_numar, adaugare_valori_la_cheltuieli, \
+    cea_mai_mare_cheltuiala
 
 
 def show_menu():
@@ -84,6 +85,22 @@ def handle_adaugare_cheltuieli(lst_cheltuieli):
     return lst_cheltuieli
 
 
+def handle_adaugare_valori_cheltuieli(lst_cheltuieli):
+    try:
+        data = input("Introduceti data: ")
+        suma = float(input("Introduceti suma: "))
+        lst_cheltuieli = adaugare_valori_la_cheltuieli(data, suma, lst_cheltuieli)
+    except ValueError as ve:
+        print('Eroare:',ve)
+    return lst_cheltuieli
+
+
+def handle_cea_mai_mare_cheltuiala(lst_cheltuieli):
+    cheltuieli = cea_mai_mare_cheltuiala(lst_cheltuieli)
+    for tip in cheltuieli:
+        print('Tipul {} are suma maxima {}'.format(tip, cheltuieli[tip]))
+
+
 def handle_crud(cheltuieli):
     while True:
         print('1.Adaugare')
@@ -91,6 +108,8 @@ def handle_crud(cheltuieli):
         print('3.Stergere')
         print('4.Stergere cheltuieli')
         print('5.Adaugare suma la cheltuiala')
+        print('6.Adaugare valori la cheltuieli')
+        print('7.Cea mai mare cheltuiala')
         print('a. Afisare')
         print('d. Detalii cheltuieli')
         print('b. Revenire')
@@ -106,6 +125,10 @@ def handle_crud(cheltuieli):
             cheltuieli= handle_stergere_cheltuieli(cheltuieli)
         elif optiune == '5':
             cheltuieli=handle_adaugare_cheltuieli(cheltuieli)
+        elif optiune == '6':
+            cheltuieli = handle_adaugare_valori_cheltuieli(cheltuieli)
+        elif optiune == '7':
+            cheltuieli = handle_cea_mai_mare_cheltuiala(cheltuieli)
         elif optiune == 'a':
             handle_show_all(cheltuieli)
         elif optiune == 'd':
