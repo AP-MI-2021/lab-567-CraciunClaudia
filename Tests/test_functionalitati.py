@@ -1,5 +1,6 @@
-from Domain.Cheltuiala import creeaza_cheltuiala
-from Logic.functionalitati import stergere_cheltuieli_pentru_numar, adaugare_valori_la_cheltuieli
+from Domain.Cheltuiala import creeaza_cheltuiala, get_suma
+from Logic.functionalitati import stergere_cheltuieli_pentru_numar, adaugare_valori_la_cheltuieli, \
+    cea_mai_mare_cheltuiala, ordonare_cheltuieli_descrescatoare
 
 
 def get_list():
@@ -25,3 +26,15 @@ def test_adaugare_valori_la_cheltuieli():
     assert a_cheltuieli in cheltuieli
     assert len(adaugare) == len(cheltuieli)
 
+def test_cea_mai_mare_cheltuiala():
+    lst_cheltuieli = get_list()
+    assert cea_mai_mare_cheltuiala("canal", lst_cheltuieli) == lst_cheltuieli[1]
+    assert cea_mai_mare_cheltuiala("întreținere", lst_cheltuieli) == lst_cheltuieli[3]
+    assert cea_mai_mare_cheltuiala(" suma > tip ", lst_cheltuieli) is None
+
+def test_ordonare_cheltuieli_descrescatoare():
+    lst_cheltuieli = get_list()
+    lst_cheltuieli = ordonare_cheltuieli_descrescatoare(lst_cheltuieli)
+    assert len(lst_cheltuieli) == 4
+    assert get_suma(lst_cheltuieli[0]) == 200
+    assert get_suma(lst_cheltuieli[-1]) == 50

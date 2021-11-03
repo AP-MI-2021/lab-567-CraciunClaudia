@@ -35,5 +35,23 @@ def adaugare_valori_la_cheltuieli(data,suma,lst_cheltuieli):
             )
     return lst_cheltuieli
 
+def cea_mai_mare_cheltuiala(tip,lst_cheltuieli):
+    '''
+    Determina cea mai mare cheltuiala dintr-o lista
+    :param tip: Tipul cheltuielii
+    :param lst_cheltuieli: lista de cheltuieli
+    :return: Cea mai mare cheltuiala din lista
+    '''
+    cheltuiala_max = None
 
+    for cheltuiala in lst_cheltuieli:
+        if get_tip(cheltuiala) == tip and (
+                cheltuiala_max is None or get_suma(cheltuiala) > get_suma(cheltuiala_max) ):
+            cheltuiala_max = cheltuiala
+
+    return cheltuiala_max
+
+def ordonare_cheltuieli_descrescatoare(lst_cheltuieli):
+    lst_cheltuieli.sort(reverse=True, key=lambda cheltuiala: get_suma(cheltuiala))
+    return lst_cheltuieli
 

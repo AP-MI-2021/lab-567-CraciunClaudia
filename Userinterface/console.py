@@ -70,13 +70,14 @@ def handle_stergere_cheltuieli(cheltuieli):
 
 
 def handle_adaugare_cheltuieli(lst_cheltuieli):
+    id = input('Introduceti id: ')
     try:
         numar_apartament = int(input("Introduceti numarul apartamentului: "))
         suma = float(input("Introduceti suma: "))
         data = input("Intrdouceti data: ")
         tip = input("Introduceti tipul cheltuielii: ")
         lst_cheltuieli = adaugare_valori_la_cheltuieli(
-            creeaza_cheltuiala(numar_apartament, suma, data, tip),lst_cheltuieli)
+            creeaza_cheltuiala(numar_apartament, suma, data, tip,id),lst_cheltuieli)
     except ValueError as ve:
         print('Eroare:',ve)
 
