@@ -1,5 +1,5 @@
 from Domain.Cheltuiala import creeaza_cheltuiala
-from Logic.functionalitati import stergere_cheltuieli_pentru_numar
+from Logic.functionalitati import stergere_cheltuieli_pentru_numar, adaugare_valori_la_cheltuieli
 
 
 def get_list():
@@ -16,4 +16,12 @@ def test_sterge_cheltuieli():
     assert s_cheltuieli not in stergere
     assert s_cheltuieli in cheltuieli
     assert len(stergere) == len(cheltuieli)
+
+def test_adaugare_valori_la_cheltuieli():
+    cheltuieli = get_list()
+    a_cheltuieli = creeaza_cheltuiala(3,555,'04.10.2021','canalizare')
+    adaugare = adaugare_valori_la_cheltuieli(cheltuieli,a_cheltuieli)
+    assert a_cheltuieli not in adaugare
+    assert a_cheltuieli in cheltuieli
+    assert len(adaugare) == len(cheltuieli)
 

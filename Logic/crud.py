@@ -49,6 +49,9 @@ def update(lst_cheltuieli,new_cheltuiala):
     :return:O lista cu cheltuiala actualizata
     '''
     #lst_cheltuieli= [c1:(1,2008),p2:(2,2009)], cheltuiala=(2,2038)
+    if read(lst_cheltuieli,get_numar(new_cheltuiala)) is None:
+        raise ValueError(f'Nu exista deja un apartament cu numarul {get_numar(numar_apartament)} pe care sa o actualizam')
+
     new_cheltuieli = []
     for cheltuiala in lst_cheltuieli:
         if get_numar(cheltuiala) != get_numar(new_cheltuiala):
@@ -64,6 +67,10 @@ def delete(lst_cheltuieli,numar_apartament:int):
     :param numar_apartament:
     :return:O lista de cheltuieli fara cheltuiala cu numarul de apartament numar_apartament
     '''
+
+    if read(lst_cheltuieli,numar_apartament) is None:
+        raise ValueError(f'Nu exista deja un apartament cu numarul {numar_apartament} pe care sa o stergem')
+
     new_cheltuieli= []
     for cheltuiala in lst_cheltuieli :
         if get_numar(numar_apartament) != numar_apartament :

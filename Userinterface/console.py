@@ -1,11 +1,11 @@
 from Domain.Cheltuiala import get_str, get_numar, get_suma, get_data, get_tip, creeaza_cheltuiala
 from Logic.crud import create, read, update, delete
-from Logic.functionalitati import stergere_cheltuieli_pentru_numar
+from Logic.functionalitati import stergere_cheltuieli_pentru_numar, adaugare_valori_la_cheltuieli
 
 
 def show_menu():
     print('1.CRUD ')
-    print('2.Reducere pret')
+    print('2.Stergere toate cheltuieli')
     print('x. Exit')
 
 
@@ -39,17 +39,26 @@ def handle_show_details(cheltuieli):
 
 
 def handle_update(cheltuieli):
-    numar_apartament = int(input('Dati noul numar al apartamentului: '))
-    suma = float(input('Dati noua suma a cheltuielii: '))
-    data = (input('Dati noua data a cheltuielii: '))
-    tip = (input('Dati noul tip al cheltuielii: '))
-    return update(cheltuieli,creeaza_cheltuiala(numar_apartament,suma,data,tip))
+    try:
+        numar_apartament = int(input('Dati noul numar al apartamentului: '))
+        suma = float(input('Dati noua suma a cheltuielii: '))
+        data = (input('Dati noua data a cheltuielii: '))
+        tip = (input('Dati noul tip al cheltuielii: '))
+        return update(cheltuieli,creeaza_cheltuiala(numar_apartament,suma,data,tip))
+    except ValueError as ve:
+        print('Eroare:',ve)
+    return cheltuieli
+
 
 
 def handle_delete(cheltuieli):
-    numar_apartament = int(input('Dati numarul apartamentului care se va sterge: '))
-    cheltuieli = delete(cheltuieli,numar_apartament)
-    print ('Stergerea a fost efectuata cu succes!')
+    try:
+        numar_apartament = int(input('Dati numarul apartamentului care se va sterge: '))
+        cheltuieli = delete(cheltuieli,numar_apartament)
+        print ('Stergerea a fost efectuata cu succes!')
+        return cheltuieli
+    except ValueError as ve:
+        print('Eroare:',ve)
     return cheltuieli
 
 
@@ -60,11 +69,27 @@ def handle_stergere_cheltuieli(cheltuieli):
     return cheltuieli
 
 
+def handle_adaugare_cheltuieli(lst_cheltuieli):
+    try:
+        numar_apartament = int(input("Introduceti numarul apartamentului: "))
+        suma = float(input("Introduceti suma: "))
+        data = input("Intrdouceti data: ")
+        tip = input("Introduceti tipul cheltuielii: ")
+        lst_cheltuieli = adaugare_valori_la_cheltuieli(
+            creeaza_cheltuiala(numar_apartament, suma, data, tip),lst_cheltuieli)
+    except ValueError as ve:
+        print('Eroare:',ve)
+
+    return lst_cheltuieli
+
+
 def handle_crud(cheltuieli):
     while True:
         print('1.Adaugare')
         print('2.Modificare')
         print('3.Stergere')
+        print('4.Stergere cheltuieli')
+        print('5.Adaugare suma la cheltuiala')
         print('a. Afisare')
         print('d. Detalii cheltuieli')
         print('b. Revenire')
@@ -73,9 +98,13 @@ def handle_crud(cheltuieli):
         if optiune == '1':
             cheltuieli = handle_add(cheltuieli)
         elif optiune == '2':
-            cheltuieli = handle_stergere_cheltuieli(cheltuieli)
+            cheltuieli = handle_update(cheltuieli)
         elif optiune == '3':
             cheltuieli = handle_delete(cheltuieli)
+        elif optiune == '4':
+            cheltuieli= handle_stergere_cheltuieli(cheltuieli)
+        elif optiune == '5':
+            cheltuieli=handle_adaugare_cheltuieli(cheltuieli)
         elif optiune == 'a':
             handle_show_all(cheltuieli)
         elif optiune == 'd':
