@@ -1,40 +1,69 @@
-from Domain.Cheltuiala import creeaza_cheltuiala, get_suma
-from Logic.functionalitati import stergere_cheltuieli_pentru_numar, adaugare_valori_la_cheltuieli, \
-    cea_mai_mare_cheltuiala, ordonare_cheltuieli_descrescatoare
+from Domain.Cheltuiala import creeaza_cheltuiala, get_id, get_suma
+from Logic.Functionalitati import stergere_cheltuieli, adauga_valoare, cea_mai_mare_cheltuiala, ordonare_descrescatoare, \
+    sume_lunare
+
+lst_cheltuieli = [
+    creeaza_cheltuiala(22, 145, "25.06.2021", "alte cheltuieli", 1),
+    creeaza_cheltuiala(12, 348, "25.06.2021", "canal", 2),
+    creeaza_cheltuiala(22, 165, "20.01.2019", "întreținere", 3),
+    creeaza_cheltuiala(22, 200, "13.12.2018", "întreținere", 4),
+]
 
 
-def get_list():
-    return [
-        creeaza_cheltuiala (200,556,'13.09.2020','canalizare'),
-        creeaza_cheltuiala(5,400,'11.12.2021','intretinere'),
-        creeaza_cheltuiala(2,45,'11.11.2021','alte cheltuieli'),
-    ]
+def test_stergere_cheltuieli():
+    lista = lst_cheltuieli
+    lista = stergere_cheltuieli(22, lista)
+    assert len(lista) == 1
+    assert get_id(1) is None
+    assert get_id(3) is None
+    assert get_id(4) is None
 
-def test_sterge_cheltuieli():
-    cheltuieli = get_list()
-    s_cheltuieli = creeaza_cheltuiala(2,5050,'03.09.2020','alte cheltuieli')
-    stergere = stergere_cheltuieli_pentru_numar(cheltuieli,s_cheltuieli)
-    assert s_cheltuieli not in stergere
-    assert s_cheltuieli in cheltuieli
-    assert len(stergere) == len(cheltuieli)
+    lista = lst_cheltuieli
+    lista = stergere_cheltuieli(13, lista)
+    assert len(lista) == 4
 
-def test_adaugare_valori_la_cheltuieli():
-    cheltuieli = get_list()
-    a_cheltuieli = creeaza_cheltuiala(3,555,'04.10.2021','canalizare')
-    adaugare = adaugare_valori_la_cheltuieli(cheltuieli,a_cheltuieli)
-    assert a_cheltuieli not in adaugare
-    assert a_cheltuieli in cheltuieli
-    assert len(adaugare) == len(cheltuieli)
+    lista = stergere_cheltuieli(12, lista)
+    assert len(lista) == 3
+    assert get_id(2) is None
+
+
+def test_adauga_valoare_la_cheltuieli():
+    lista = lst_cheltuieli
+    lista = adauga_valoare("25.06.2021", 10, lista)
+    assert len(lista) == 4
+    assert get_suma(lista[0]) == 160
+    assert get_suma(lista[1]) == 178
+    assert get_suma(lista[2]) == 312
+    assert get_suma(lista[3]) == 211
+
 
 def test_cea_mai_mare_cheltuiala():
-    lst_cheltuieli = get_list()
-    assert cea_mai_mare_cheltuiala("canal", lst_cheltuieli) == lst_cheltuieli[1]
-    assert cea_mai_mare_cheltuiala("întreținere", lst_cheltuieli) == lst_cheltuieli[3]
-    assert cea_mai_mare_cheltuiala(" suma > tip ", lst_cheltuieli) is None
+    lista = lst_cheltuieli
+    assert cea_mai_mare_cheltuiala("canal") == lista[1]
+    assert cea_mai_mare_cheltuiala("întreținere") == lista[3]
+    assert cea_mai_mare_cheltuiala(" ") is None
 
-def test_ordonare_cheltuieli_descrescatoare():
-    lst_cheltuieli = get_list()
-    lst_cheltuieli = ordonare_cheltuieli_descrescatoare(lst_cheltuieli)
-    assert len(lst_cheltuieli) == 4
-    assert get_suma(lst_cheltuieli[0]) == 200
-    assert get_suma(lst_cheltuieli[-1]) == 50
+
+def test_ordonare_descrescatoare():
+    lista = lst_cheltuieli
+    lista = ordonare_descrescatoare(lista)
+    assert len(lista) == 4
+    assert get_suma(lista[0]) == 348
+    assert get_suma(lista[-1]) == 145
+
+
+def test_sume_lunare():
+    lista = lst_cheltuieli
+    lista.append(creeaza_cheltuiala(22, 145, "03.11.2021", "canal", 5))
+    sume = sume_lunare(lista)
+    assert len(sume) == 3
+    assert len(sume['11 2021']) == 33
+    assert sume["11 2021"][22] == 230
+
+
+def test_functionalitati():
+    test_stergere_cheltuieli()
+    test_adauga_valoare_la_cheltuieli()
+    test_cea_mai_mare_cheltuiala()
+    test_ordonare_descrescatoare()
+    test_sume_lunare()
