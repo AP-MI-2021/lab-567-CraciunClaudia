@@ -1,48 +1,61 @@
-def creeaza_cheltuiala(numar_apartament,suma,data,tip):
+def creeaza_cheltuiala(numar_apartament: int, suma: float , data_c , tip , id):
     '''
     Creeaza o cheltuiala.
-    :param numar_apartament: Numarul apartamentului,trebuie sa fie unic.
-    :param suma: Suma care trebuie platita
-    :param data: Data la care trebuie platita
-    :param tip: Tipul cheltuielii:intretinere,canal sau alte cheltuieli.
+    :param numar_apartament: Numarul apartamentului
+    :param suma: Suma
+    :param data_c: Data cheltuielii
+    :param tip: Tipul cheltuielii (canalizare,intretinere,alte cheltuieli)
+    :param id:id-ul cheltuielii.Trebuie sa fie unic.
     :return:O cheltuiala
     '''
+    return {
+        'numar' : numar_apartament,
+        'suma' : suma,
+        'data_c' : data_c,
+        'tip' :tip,
+        'id' : id
 
-    return {'numar':numar_apartament,
-            'suma':suma,
-            'data':data,
-            'tip':tip}
+    }
 
-def get_numar(apartament):
+def get_numar(cheltuiala):
     '''
-    Getter pentru numarul apartamentului.
-    :param apartament: apartamentul
-    :return:Numarul apartamentului
+    Getter pentru numarul apartamentului
+    :param cheltuiala:cheltuiala
+    :return:numarul apartamentului
     '''
-    return apartament['numar']
+    return cheltuiala['numar']
 
-def get_suma(apartament):
+def get_suma(cheltuiala):
     '''
-    Getter pentru suma care trebuie platita
-    :param suma:suma
-    :return:Suma care trebuie platita
+    Getter pentru suma
+    :param cheltuiala:Cheltuiala
+    :return:Suma cheltuielii
     '''
-    return apartament['suma']
-def get_data(apartament):
-    '''
-    Getter pentru data la care trebuie platita
-    :param data: Data
-    :return: Data la care trebuie platita
-    '''
-    return apartament['data']
-def get_tip(apartament):
-    '''
-    Getter pentru tipul de cheltuiala
-    :param tip: Tipul de cheltuiala
-    :return: Tipul de cheltuiala
-    '''
-    return apartament['tip']
+    return cheltuiala['suma']
 
-def get_str(apartament):
-    return f'Apartamentul cu numarul {get_numar(apartament)},suma care trebuie platita{get_suma(apartament)},la data de {get_data(apartament)},cu tipul cheltuielii: {get_tip(apartament)}'
+def get_data_c(cheltuiala):
+    '''
+    Getter pentru data cheltuielii
+    :param cheltuiala: Cheltuiala
+    :return: Data cheltuielii
+    '''
+    return cheltuiala['data_c']
 
+def get_tip(cheltuiala):
+    '''
+    Getter pentru tipul cheltuielii
+    :param cheltuiala: Cheltuiala
+    :return: Tipul cheltuielii
+    '''
+    return cheltuiala['tip']
+
+def get_id(cheltuiala):
+    '''
+    Getter pentru id-ul cheltuielii
+    :param cheltuiala: Cheltuiala
+    :return: Id-ul cheltuielii
+    '''
+    return cheltuiala['id']
+
+def get_str(cheltuiala):
+    return f'Cheltuiala cu id-ul {get_id(cheltuiala)}, cu numarul {get_numar(cheltuiala)}, cu suma {get_suma(cheltuiala)},din data {get_data_c(cheltuiala)}, cu tipul {get_tip(cheltuiala)} '

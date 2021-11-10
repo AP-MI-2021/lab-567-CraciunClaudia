@@ -9,6 +9,8 @@ def main ():
     cheltuieli = create(cheltuieli,2,50,'09.08.2020','intretinere')
     cheltuieli = create(cheltuieli,3,500,'01.01.2021','alte cheltuieli')
     cheltuieli = run_ui(cheltuieli)
+    print('cheltuieli')
+    print(cheltuieli)
 
 if __name__ == '__main__':
     test_crud()
