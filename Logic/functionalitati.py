@@ -1,5 +1,5 @@
 from Domain.Cheltuiala import get_numar, get_id, get_data_c, get_suma, get_tip, creeaza_cheltuiala
-from Logic.CRUD import delete
+from Logic.crud import delete
 
 
 def stergere_cheltuieli(numar_apartament, lst_cheltuieli):

@@ -1,5 +1,5 @@
 from Domain.Cheltuiala import creeaza_cheltuiala, get_id
-from Logic.CRUD import create, read, update, delete
+from Logic.crud import create, read, update, delete
 
 
 def get_data():

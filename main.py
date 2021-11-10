@@ -1,6 +1,6 @@
-from Logic.CRUD import create
-from Tests.Test_CRUD import test_crud
-from UserInterface.Console import run_ui
+from Logic.crud import create
+from Tests.test_crud import test_crud
+from Userinterface.console import run_ui
 
 
 def main():

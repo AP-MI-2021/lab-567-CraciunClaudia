@@ -1,6 +1,6 @@
 from Domain.Cheltuiala import get_str, get_numar, get_suma, get_data_c, get_tip, creeaza_cheltuiala
-from Logic.CRUD import create, read, update, delete
-from Logic.Functionalitati import stergere_cheltuieli, adauga_valoare, cea_mai_mare_cheltuiala, ordonare_descrescatoare, \
+from Logic.crud import create, read, update, delete
+from Logic.functionalitati import stergere_cheltuieli, adauga_valoare, cea_mai_mare_cheltuiala, ordonare_descrescatoare, \
     sume_lunare
 
 

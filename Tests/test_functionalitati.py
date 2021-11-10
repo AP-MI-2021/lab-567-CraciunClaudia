@@ -1,5 +1,5 @@
 from Domain.Cheltuiala import creeaza_cheltuiala, get_id, get_suma
-from Logic.Functionalitati import stergere_cheltuieli, adauga_valoare, cea_mai_mare_cheltuiala, ordonare_descrescatoare, \
+from Logic.functionalitati import stergere_cheltuieli, adauga_valoare, cea_mai_mare_cheltuiala, ordonare_descrescatoare, \
     sume_lunare
 
 lst_cheltuieli = [
